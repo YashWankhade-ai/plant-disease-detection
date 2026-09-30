@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+
+{% block title %}PlantCare AI — Plant Leaf Disease Detection & Crop Protection{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section mb-5">
+  <div class="container position-relative">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <span class="hero-tag">
+          <i class="bi bi-stars text-warning"></i> State-of-the-Art CNN Deep Learning
+        </span>
+        <h1 class="hero-title mb-3">
+          Protect Your Harvest with <span class="text-warning">Instant AI</span> Leaf Disease Detection
+        </h1>
+        <p class="hero-subtitle mb-4">
+          Upload or capture a photo of any crop leaf to diagnose fungal, bacterial, and viral infections in seconds. Receive instant organic treatments, chemical controls, and supplement recommendations.
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="{{ url_for('ai_engine') }}" class="btn btn-warning btn-lg rounded-pill fw-bold text-dark px-4 py-2 shadow">
+            <i class="bi bi-camera-fill me-2"></i>Scan Leaf Now
+          </a>
+          <a href="{{ url_for('supplements') }}" class="btn btn-outline-light btn-lg rounded-pill px-4 py-2">
+            <i class="bi bi-capsule me-2"></i>Explore Treatments
+          </a>
+        </div>
+        <div class="d-flex align-items-center gap-4 mt-4 pt-3 border-top border-white-50">
+          <div>
+            <h4 class="mb-0 fw-bold text-white">20+</h4>
+            <small class="text-white-50">Plant Diseases</small>
+          </div>
+          <div class="border-start border-white-50 ps-4">
+            <h4 class="mb-0 fw-bold text-white">98.2%</h4>
+            <small class="text-white-50">Validation Accuracy</small>
+          </div>
+          <div class="border-start border-white-50 ps-4">
+            <h4 class="mb-0 fw-bold text-white">&lt; 1s</h4>
+            <small class="text-white-50">Instant Inference</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 text-center">
+        <div class="p-4 bg-white bg-opacity-10 rounded-4 border border-white-50 backdrop-blur shadow-lg">
+          <div class="bg-dark rounded-3 p-3 mb-3 position-relative overflow-hidden" style="min-height: 240px; display: flex; align-items: center; justify-content: center;">
+            <i class="bi bi-tree text-success display-1 opacity-75"></i>
+            <div class="position-absolute bottom-0 start-0 end-0 bg-dark bg-opacity-75 p-2 text-white small">
+              <span class="badge bg-success me-1">Live AI Vision</span> Leaf Pathology Diagnostic Suite
+            </div>
+          </div>
+          <div class="text-start">
+            <div class="d-flex justify-content-between text-white-50 small mb-1">
+              <span>CNN Feature Map Analysis</span>
+              <span class="text-success fw-bold">Active</span>
+            </div>
+            <div class="progress" style="height: 6px;">
+              <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="container py-4 mb-5">
+  <div class="text-center mb-5">
+    <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill text-uppercase fw-semibold">Simple 3-Step Process</span>
+    <h2 class="fw-bold mt-2">How PlantCare AI Diagnoses Crops</h2>
+    <p class="text-muted">Fast, accurate disease diagnostics right in your field or greenhouse</p>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="feature-card text-center">
+        <div class="feature-icon-wrapper icon-leaf mx-auto">
+          <i class="bi bi-camera"></i>
+        </div>
+        <h4 class="fw-bold mb-2">1. Snap or Upload Photo</h4>
+        <p class="text-muted">Take a clear photo of the symptomatic leaf using your smartphone or upload an existing image from your files.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="feature-card text-center">
+        <div class="feature-icon-wrapper icon-ai mx-auto">
+          <i class="bi bi-cpu"></i>
+        </div>
+        <h4 class="fw-bold mb-2">2. Deep Learning Analysis</h4>
+        <p class="text-muted">Our Convolutional Neural Network analyzes lesion morphology, edge discoloration, and microscopic patterns.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="feature-card text-center">
+        <div class="feature-icon-wrapper icon-shield mx-auto">
+          <i class="bi bi-shield-check"></i>
+        </div>
+        <h4 class="fw-bold mb-2">3. Actionable Cure & Care</h4>
+        <p class="text-muted">Instantly receive diagnosis results, severity rating, organic remedies, and approved chemical supplement guidelines.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Supported Crops & Diseases -->
+<section class="container py-4 mb-5">
+  <div class="p-4 p-md-5 rounded-4 bg-white border border-light-subtle shadow-sm">
+    <div class="row align-items-center mb-4">
+      <div class="col-md-8">
+        <h3 class="fw-bold text-success-emphasis">Supported Major Crops & Diseases</h3>
+        <p class="text-muted mb-0">Trained on thousands of certified plant pathology leaf specimens.</p>
+      </div>
+      <div class="col-md-4 text-md-end mt-3 mt-md-0">
+        <a href="{{ url_for('ai_engine') }}" class="btn btn-plant-primary">
+          <i class="bi bi-lightning-charge me-1"></i>Try AI Diagnostic
+        </a>
+      </div>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-lg-4 col-md-6">
+        <div class="border rounded-3 p-3 h-100 bg-light">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="fs-4">🍅</span>
+            <h5 class="fw-bold mb-0">Tomato</h5>
+          </div>
+          <ul class="small text-muted mb-0 ps-3">
+            <li>Bacterial Spot (Xanthomonas)</li>
+            <li>Early Blight (Alternaria solani)</li>
+            <li>Late Blight (Phytophthora infestans)</li>
+            <li>Leaf Mold (Passalora fulva)</li>
+            <li>Septoria Leaf Spot</li>
+            <li>Yellow Leaf Curl Virus</li>
+            <li>Healthy Foliage</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="border rounded-3 p-3 h-100 bg-light">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="fs-4">🥔</span>
+            <h5 class="fw-bold mb-0">Potato</h5>
+          </div>
+          <ul class="small text-muted mb-0 ps-3">
+            <li>Early Blight (Alternaria solani)</li>
+            <li>Late Blight (Phytophthora infestans)</li>
+            <li>Healthy Foliage</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="border rounded-3 p-3 h-100 bg-light">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="fs-4">🍎</span>
+            <h5 class="fw-bold mb-0">Apple</h5>
+          </div>
+          <ul class="small text-muted mb-0 ps-3">
+            <li>Apple Scab (Venturia inaequalis)</li>
+            <li>Black Rot / Frogeye Leaf Spot</li>
+            <li>Cedar Apple Rust</li>
+            <li>Healthy Foliage</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="border rounded-3 p-3 h-100 bg-light">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="fs-4">🌽</span>
+            <h5 class="fw-bold mb-0">Corn (Maize)</h5>
+          </div>
+          <ul class="small text-muted mb-0 ps-3">
+            <li>Common Rust (Puccinia sorghi)</li>
+            <li>Northern Leaf Blight</li>
+            <li>Healthy Foliage</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="border rounded-3 p-3 h-100 bg-light">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="fs-4">🍇</span>
+            <h5 class="fw-bold mb-0">Grape</h5>
+          </div>
+          <ul class="small text-muted mb-0 ps-3">
+            <li>Black Rot (Phyllosticta ampelicida)</li>
+            <li>Leaf Blight (Isariopsis Leaf Spot)</li>
+            <li>Healthy Foliage</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="border rounded-3 p-3 h-100 bg-success bg-opacity-10 d-flex flex-column justify-content-center text-center">
+          <i class="bi bi-shield-plus text-success display-6 mb-2"></i>
+          <h6 class="fw-bold text-success mb-1">More Varieties Supported</h6>
+          <p class="small text-muted mb-3">Model architecture continuously refined for foliar patterns.</p>
+          <a href="{{ url_for('ai_engine') }}" class="btn btn-outline-success btn-sm align-self-center">Scan Your Plant</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action Banner -->
+<section class="container mb-5">
+  <div class="bg-dark text-white rounded-4 p-5 text-center position-relative overflow-hidden" style="background: linear-gradient(135deg, #1b4332 0%, #081c15 100%) !important;">
+    <div class="position-relative z-1 max-w-600 mx-auto">
+      <h2 class="fw-bold mb-3">Ready to Inspect Your Crop Health?</h2>
+      <p class="text-white-50 mb-4">No waiting for laboratory results. Get instant leaf pathology analysis and treatment solutions right on your device.</p>
+      <a href="{{ url_for('ai_engine') }}" class="btn btn-warning btn-lg rounded-pill fw-bold text-dark px-5">
+        <i class="bi bi-camera me-2"></i>Start Free Diagnosis
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

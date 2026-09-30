@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Account — PlantCare AI{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="auth-icon">
+        <i class="bi bi-person-plus-fill"></i>
+      </div>
+      <h3 class="fw-bold text-success-emphasis">Create Account</h3>
+      <p class="text-muted small">Join PlantCare AI to record scan histories and protect your garden & crops</p>
+    </div>
+
+    <form method="POST" action="{{ url_for('register') }}">
+      <div class="mb-3">
+        <label for="username" class="form-label fw-semibold small">Username</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-end-0"><i class="bi bi-person text-muted"></i></span>
+          <input type="text" class="form-control border-start-0" id="username" name="username" placeholder="Choose a username" required minlength="3">
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label fw-semibold small">Email Address</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-end-0"><i class="bi bi-envelope text-muted"></i></span>
+          <input type="email" class="form-control border-start-0" id="email" name="email" placeholder="you@example.com" required>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label fw-semibold small">Password</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-end-0"><i class="bi bi-lock text-muted"></i></span>
+          <input type="password" class="form-control border-start-0" id="password" name="password" placeholder="At least 6 characters" required minlength="6">
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label for="confirm_password" class="form-label fw-semibold small">Confirm Password</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-end-0"><i class="bi bi-shield-lock text-muted"></i></span>
+          <input type="password" class="form-control border-start-0" id="confirm_password" name="confirm_password" placeholder="Re-enter password" required>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-plant-primary w-100 py-2 mb-3">
+        <i class="bi bi-check-circle me-2"></i>Register
+      </button>
+
+      <div class="text-center">
+        <span class="text-muted small">Already have an account? </span>
+        <a href="{{ url_for('login') }}" class="text-success fw-bold small text-decoration-none">Sign In</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

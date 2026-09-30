@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+
+{% block title %}Agricultural Supplements & Treatments — PlantCare AI{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  
+  <!-- Header -->
+  <div class="text-center mb-5">
+    <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill text-uppercase fw-semibold">
+      <i class="bi bi-capsule me-1"></i>Treatment & Nutrition Directory
+    </span>
+    <h2 class="fw-bold mt-2 text-success-emphasis">Agricultural Supplements & Crop Remedies</h2>
+    <p class="text-muted max-w-600 mx-auto">
+      Curated guide of recommended fungicides, biological inoculants, and foliar fertilizers designed to cure and prevent foliar crop diseases.
+    </p>
+
+    <!-- Category Filter Tabs -->
+    <div class="d-flex flex-wrap justify-content-center gap-2 mt-4">
+      <button type="button" class="btn btn-success supplement-filter-btn active rounded-pill px-3 py-1" data-filter="all">
+        All Remedies
+      </button>
+      <button type="button" class="btn btn-outline-secondary supplement-filter-btn rounded-pill px-3 py-1" data-filter="organic">
+        🌿 Organic & Biological
+      </button>
+      <button type="button" class="btn btn-outline-secondary supplement-filter-btn rounded-pill px-3 py-1" data-filter="fungicide">
+        🧪 Chemical Fungicides
+      </button>
+      <button type="button" class="btn btn-outline-secondary supplement-filter-btn rounded-pill px-3 py-1" data-filter="fertilizer">
+        🌱 Foliar Nutrition & Minerals
+      </button>
+    </div>
+  </div>
+
+  <!-- Supplements Grid -->
+  <div class="row g-4" id="supplementsGrid">
+
+    <!-- 1. Cold Pressed Neem Oil -->
+    <div class="col-lg-4 col-md-6 supplement-item" data-category="organic">
+      <div class="supplement-card p-4">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <span class="supplement-badge bg-success-subtle text-success border border-success-subtle">
+            Organic Bio-Pesticide
+          </span>
+          <span class="badge bg-light text-muted border">Eco-Certified</span>
+        </div>
+        <h5 class="fw-bold mb-1 text-success-emphasis">Pure Cold-Pressed Neem Oil (10,000 ppm)</h5>
+        <p class="text-muted small mb-3">Botanical broad-spectrum antifungal and insect repelling emulsion.</p>
+        <div class="border-top pt-3 small">
+          <p class="mb-1"><strong>Target Diseases:</strong> Powdery mildew, early leaf spots, rusts, whiteflies, aphids.</p>
+          <p class="mb-1"><strong>Dosage:</strong> 5 ml/L of water with 2 ml mild liquid soap as emulsifier.</p>
+          <p class="mb-0 text-success"><strong>Harvest Interval:</strong> 0 days (safe until harvest date).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Copper Oxychloride 50% WP -->
+    <div class="col-lg-4 col-md-6 supplement-item" data-category="fungicide">
+      <div class="supplement-card p-4">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <span class="supplement-badge bg-primary-subtle text-primary border border-primary-subtle">
+            Broad Spectrum Fungicide
+          </span>
+          <span class="badge bg-light text-muted border">Preventative</span>
+        </div>
+        <h5 class="fw-bold mb-1 text-primary-emphasis">Copper Oxychloride 50% WP</h5>
+        <p class="text-muted small mb-3">Inorganic copper protectant active against both fungi and bacterial spots.</p>
+        <div class="border-top pt-3 small">
+          <p class="mb-1"><strong>Target Diseases:</strong> Tomato Bacterial Spot, Early & Late Blight, Apple Scab, Grape Black Rot.</p>
+          <p class="mb-1"><strong>Dosage:</strong> 2.5 - 3.0 g/L foliar spray, ensuring full leaf coverage.</p>
+          <p class="mb-0 text-muted"><strong>Harvest Interval:</strong> 7 - 14 days before harvest.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Bacillus Subtilis Bio-Fungicide -->
+    <div class="col-lg-4 col-md-6 supplement-item" data-category="organic">
+      <div class="supplement-card p-4">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <span class="supplement-badge bg-success-subtle text-success border border-success-subtle">
+            Microbial Bio-Inoculant
+          </span>
+          <span class="badge bg-light text-muted border">Probiotic</span>
+        </div>
+        <h5 class="fw-bold mb-1 text-success-emphasis">Bacillus Subtilis Microbial Spray</h5>
+        <p class="text-muted small mb-3">Beneficial antagonistic bacteria that colonize leaf surfaces and secrete antifungal lipopeptides.</p>
+        <div class="border-top pt-3 small">
+          <p class="mb-1"><strong>Target Diseases:</strong> Tomato Leaf Mold, Septoria Spot, Corn Leaf Blight, Root rots.</p>
+          <p class="mb-1"><strong>Dosage:</strong> 4 - 5 g/L applied bi-weekly during humid conditions.</p>
+          <p class="mb-0 text-success"><strong>Harvest Interval:</strong> 0 days (safe for organic produce).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Mancozeb 75% WP -->
+    <div class="col-lg-4 col-md-6 supplement-item" data-category="fungicide">
+      <div class="supplement-card p-4">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <span class="supplement-badge bg-danger-subtle text-danger border border-danger-subtle">
+            Multi-Site Protectant
+          </span>
+          <span class="badge bg-light text-muted border">Chemical Control</span>
+        </div>
+        <h5 class="fw-bold mb-1 text-danger-emphasis">Mancozeb 75% WP (Dithiocarbamate)</h5>
+        <p class="text-muted small mb-3">Standard contact agricultural fungicide providing protective barrier against spore germination.</p>
+        <div class="border-top pt-3 small">
+          <p class="mb-1"><strong>Target Diseases:</strong> Potato Early & Late Blight, Tomato Early Blight, Grape Black Rot, Apple Scab.</p>
+          <p class="mb-1"><strong>Dosage:</strong> 2.0 - 2.5 g/L applied before rain or upon initial disease warnings.</p>
+          <p class="mb-0 text-muted"><strong>Harvest Interval:</strong> 7 days. Wear protective mask and gloves.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Cheated Calcium & Boron Foliar Spray -->
+    <div class="col-lg-4 col-md-6 supplement-item" data-category="fertilizer">
+      <div class="supplement-card p-4">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <span class="supplement-badge bg-warning-subtle text-warning-emphasis border border-warning-subtle">
+            Cell Wall Strengthener
+          </span>
+          <span class="badge bg-light text-muted border">Nutrient Booster</span>
+        </div>
+        <h5 class="fw-bold mb-1 text-dark">Chelated Calcium + Boron (CaB)</h5>
+        <p class="text-muted small mb-3">Foliar liquid mineral booster that thickens plant cuticle and prevents blossom end rot.</p>
+        <div class="border-top pt-3 small">
+          <p class="mb-1"><strong>Target Crops:</strong> Tomatoes, Apples, Peppers, Potatoes, Grape vines.</p>
+          <p class="mb-1"><strong>Dosage:</strong> 2.0 ml/L applied during early flowering and fruit development.</p>
+          <p class="mb-0 text-success"><strong>Harvest Interval:</strong> 0 days. Non-toxic plant nutrient.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Metalaxyl-M + Mancozeb (Ridomil Gold) -->
+    <div class="col-lg-4 col-md-6 supplement-item" data-category="fungicide">
+      <div class="supplement-card p-4">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <span class="supplement-badge bg-danger-subtle text-danger border border-danger-subtle">
+            Systemic + Contact
+          </span>
+          <span class="badge bg-light text-muted border">Curative Action</span>
+        </div>
+        <h5 class="fw-bold mb-1 text-danger-emphasis">Metalaxyl-M + Mancozeb</h5>
+        <p class="text-muted small mb-3">Powerful systemic fungicide that penetrates vascular tissue to arrest virulent oomycete infections.</p>
+        <div class="border-top pt-3 small">
+          <p class="mb-1"><strong>Target Diseases:</strong> Potato Late Blight, Tomato Late Blight, Downy Mildew.</p>
+          <p class="mb-1"><strong>Dosage:</strong> 2.5 g/L as an emergency curative spray at first symptom detection.</p>
+          <p class="mb-0 text-muted"><strong>Harvest Interval:</strong> 14 days before harvest.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Organic Seaweed Kelp Extract -->
+    <div class="col-lg-4 col-md-6 supplement-item" data-category="fertilizer">
+      <div class="supplement-card p-4">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <span class="supplement-badge bg-success-subtle text-success border border-success-subtle">
+            Organic Biostimulant
+          </span>
+          <span class="badge bg-light text-muted border">Natural Immunity</span>
+        </div>
+        <h5 class="fw-bold mb-1 text-success-emphasis">Liquid Norwegian Kelp Extract</h5>
+        <p class="text-muted small mb-3">Rich in auxins, cytokinins, and trace minerals to stimulate phytoalexin disease resistance.</p>
+        <div class="border-top pt-3 small">
+          <p class="mb-1"><strong>Target Crops:</strong> All crops (Corn, Tomato, Apple, Grape, Potato).</p>
+          <p class="mb-1"><strong>Dosage:</strong> 3 ml/L foliar spray every 10-14 days.</p>
+          <p class="mb-0 text-success"><strong>Harvest Interval:</strong> 0 days. Enhances fruit color and sweetness.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Potassium Phosphite 0-0-28 -->
+    <div class="col-lg-4 col-md-6 supplement-item" data-category="fertilizer">
+      <div class="supplement-card p-4">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <span class="supplement-badge bg-info-subtle text-info-emphasis border border-info-subtle">
+            Systemic SAR Inducer
+          </span>
+          <span class="badge bg-light text-muted border">Foliar Feed</span>
+        </div>
+        <h5 class="fw-bold mb-1 text-dark">Potassium Phosphite (K-Phite)</h5>
+        <p class="text-muted small mb-3">Induces Systemic Acquired Resistance (SAR) to trigger natural chemical defenses against fungi.</p>
+        <div class="border-top pt-3 small">
+          <p class="mb-1"><strong>Target Diseases:</strong> Downy mildew, Phytophthora, Alternaria blights.</p>
+          <p class="mb-1"><strong>Dosage:</strong> 2.5 ml/L foliar drench.</p>
+          <p class="mb-0 text-success"><strong>Harvest Interval:</strong> 1 day.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Trichoderma Viride Bio-Fungicide -->
+    <div class="col-lg-4 col-md-6 supplement-item" data-category="organic">
+      <div class="supplement-card p-4">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <span class="supplement-badge bg-success-subtle text-success border border-success-subtle">
+            Antagonistic Fungi
+          </span>
+          <span class="badge bg-light text-muted border">Rhizosphere Shield</span>
+        </div>
+        <h5 class="fw-bold mb-1 text-success-emphasis">Trichoderma Viride Spore Formulation</h5>
+        <p class="text-muted small mb-3">Parasitizes pathogenic fungi in the soil and foliage, releasing cell-wall degrading chitinase enzymes.</p>
+        <div class="border-top pt-3 small">
+          <p class="mb-1"><strong>Target Diseases:</strong> Rhizoctonia, Fusarium, Pythium, Sclerotinia damping off.</p>
+          <p class="mb-1"><strong>Dosage:</strong> 5 g/L for root drench or 3 g/L for foliar application.</p>
+          <p class="mb-0 text-success"><strong>Harvest Interval:</strong> 0 days (100% bio-safe).</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Safety Notice -->
+  <div class="alert alert-warning border-0 rounded-4 shadow-sm mt-5 p-4 d-flex align-items-center gap-3">
+    <i class="bi bi-shield-exclamation fs-1 text-warning"></i>
+    <div>
+      <h6 class="fw-bold mb-1">Pesticide Safety & Application Precaution:</h6>
+      <p class="small mb-0 text-secondary">
+        Always wear personal protective equipment (gloves, eye protection, respirator) when spraying chemical fungicides. Spray during calm early mornings or late afternoons to avoid scorching leaves and harming pollinators. Strictly adhere to regional harvest interval laws.
+      </p>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

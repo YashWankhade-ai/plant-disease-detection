@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.env
+.venv
+env/
+venv/
+*.sqlite3
+instance/
+.pytest_cache/
+.DS_Store
+Thumbs.db
+static/uploads/*
+!static/uploads/.gitkeep
+model/*.weights.h5

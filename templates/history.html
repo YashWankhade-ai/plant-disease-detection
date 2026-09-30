@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}Diagnosis History — PlantCare AI{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+    <div>
+      <h2 class="fw-bold text-success-emphasis mb-1">
+        <i class="bi bi-clock-history me-2 text-success"></i>Leaf Scan History
+      </h2>
+      <p class="text-muted small mb-0">Record of your recent plant pathology assessments</p>
+    </div>
+
+    <div class="d-flex gap-2">
+      {% if scans and scans|length > 0 %}
+        <form method="POST" action="{{ url_for('clear_history') }}" onsubmit="return confirm('Are you sure you want to clear your scan history?');">
+          <button type="submit" class="btn btn-outline-danger btn-sm rounded-pill px-3">
+            <i class="bi bi-trash3 me-1"></i>Clear History
+          </button>
+        </form>
+      {% endif %}
+      <a href="{{ url_for('ai_engine') }}" class="btn btn-plant-primary btn-sm rounded-pill px-3">
+        <i class="bi bi-camera me-1"></i>New Scan
+      </a>
+    </div>
+  </div>
+
+  {% if not session.get('user_id') %}
+    <div class="alert alert-info border-0 rounded-4 shadow-sm mb-4 d-flex align-items-center gap-3">
+      <i class="bi bi-info-circle-fill fs-3 text-info"></i>
+      <div>
+        <strong>Browsing as Guest:</strong>
+        <span class="small">These scans are stored in your current session. <a href="{{ url_for('register') }}" class="alert-link">Create a free account</a> or <a href="{{ url_for('login') }}" class="alert-link">sign in</a> to permanently preserve your plant scan records.</span>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if scans and scans|length > 0 %}
+    <div class="history-table-card">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th scope="col" class="ps-4">Leaf Photo</th>
+              <th scope="col">Crop</th>
+              <th scope="col">Diagnosis / Condition</th>
+              <th scope="col">Health Status</th>
+              <th scope="col">Confidence</th>
+              <th scope="col">Date & Time</th>
+              <th scope="col" class="text-end pe-4">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for scan in scans %}
+              <tr>
+                <td class="ps-4">
+                  {% if scan.image_path %}
+                    <img src="{{ url_for('static', filename='uploads/' + scan.image_path) }}" alt="Leaf" class="history-thumb">
+                  {% else %}
+                    <div class="history-thumb bg-light d-flex align-items-center justify-content-center text-muted">
+                      <i class="bi bi-image"></i>
+                    </div>
+                  {% endif %}
+                </td>
+                <td class="fw-semibold text-dark">{{ scan.crop or 'Crop' }}</td>
+                <td>
+                  <div class="fw-semibold">{{ scan.disease_name }}</div>
+                </td>
+                <td>
+                  {% if scan.status == 'Healthy' %}
+                    <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3 py-1">
+                      <i class="bi bi-check-circle me-1"></i>Healthy
+                    </span>
+                  {% else %}
+                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill px-3 py-1">
+                      <i class="bi bi-exclamation-circle me-1"></i>Diseased
+                    </span>
+                  {% endif %}
+                </td>
+                <td>
+                  <span class="fw-bold text-success">{{ scan.confidence }}%</span>
+                </td>
+                <td class="small text-muted">
+                  {{ scan.timestamp.strftime('%b %d, %Y - %I:%M %p') if scan.timestamp else 'Recently' }}
+                </td>
+                <td class="text-end pe-4">
+                  <a href="{{ url_for('view_result', scan_id=scan.id) }}" class="btn btn-outline-success btn-sm rounded-pill px-3">
+                    <i class="bi bi-eye me-1"></i>View Report
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  {% else %}
+    <div class="text-center py-5 bg-white rounded-4 border border-light-subtle shadow-sm my-4">
+      <div class="display-3 text-muted mb-3 opacity-50">
+        <i class="bi bi-journal-x"></i>
+      </div>
+      <h4 class="fw-bold text-secondary">No Plant Scans Yet</h4>
+      <p class="text-muted small max-w-500 mx-auto mb-4">
+        You haven't scanned any crops yet. Take a snapshot of a leaf to identify diseases and receive tailor-made agronomic remedies.
+      </p>
+      <a href="{{ url_for('ai_engine') }}" class="btn btn-plant-primary px-4 py-2">
+        <i class="bi bi-camera me-2"></i>Run Your First Diagnosis
+      </a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

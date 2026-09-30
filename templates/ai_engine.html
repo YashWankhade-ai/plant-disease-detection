@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% block title %}AI Leaf Pathology Engine — PlantCare AI{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      
+      <!-- Header -->
+      <div class="text-center mb-4">
+        <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill text-uppercase fw-semibold">
+          <i class="bi bi-cpu-fill me-1"></i>CNN Vision & Pathology Analysis
+        </span>
+        <h2 class="fw-bold mt-2 text-success-emphasis">Plant & Vegetable Disease Diagnostic Engine</h2>
+        <p class="text-muted">Upload an image or capture with your camera to detect crop infections and receive instant treatments.</p>
+      </div>
+
+      <!-- Main Upload Card -->
+      <div class="upload-card p-4 p-md-5 mb-4">
+        <form id="uploadForm" method="POST" action="{{ url_for('predict') }}" enctype="multipart/form-data">
+          
+          <input type="file" id="imageUploadInput" name="file" accept="image/png, image/jpeg, image/jpg, image/webp" class="d-none">
+
+          <!-- Crop / Vegetable Selector -->
+          <div class="mb-4">
+            <label for="crop_type" class="form-label fw-bold text-success-emphasis small">
+              <i class="bi bi-tag-fill me-1 text-success"></i>Target Vegetable / Plant Crop
+            </label>
+            <select class="form-select form-select-lg border-success-subtle shadow-sm rounded-3 fw-semibold" id="crop_type" name="crop_type">
+              <option value="auto" selected>🤖 Auto-Detect Crop & Vegetable (Recommended)</option>
+              <option value="Potato">🥔 Potato (Tubers & Leaves)</option>
+              <option value="Tomato">🍅 Tomato (Leaves & Fruit)</option>
+              <option value="Corn (Maize)">🌽 Corn / Maize</option>
+              <option value="Apple">🍎 Apple</option>
+              <option value="Grape">🍇 Grape</option>
+            </select>
+            <div class="form-text small text-muted">
+              Choose your crop for instant guided focus, or let AI automatically identify the vegetable & disease.
+            </div>
+          </div>
+
+          <!-- Drag and Drop Box -->
+          <div id="dropZone" class="drop-zone mb-3">
+            <div class="drop-zone-icon">
+              <i class="bi bi-cloud-arrow-up-fill"></i>
+            </div>
+            <h5 class="fw-bold mb-2">Drag and drop leaf image here</h5>
+            <p class="text-muted small mb-3">Supports JPG, PNG, WEBP (Max 16MB)</p>
+            <div class="d-flex justify-content-center gap-2">
+              <button type="button" class="btn btn-plant-outline btn-sm" onclick="document.getElementById('imageUploadInput').click();">
+                <i class="bi bi-folder2-open me-1"></i>Browse Files
+              </button>
+              <button type="button" class="btn btn-outline-success btn-sm" id="openCameraBtn">
+                <i class="bi bi-camera me-1"></i>Take Photo
+              </button>
+            </div>
+          </div>
+
+          <!-- Preview Area -->
+          <div id="previewContainer" class="preview-container">
+            <div class="p-3 border rounded-3 bg-light d-inline-block position-relative text-center">
+              <img id="previewImage" src="" alt="Leaf Preview" class="preview-image mb-2 d-block mx-auto">
+              <div class="d-flex justify-content-between align-items-center gap-3 mt-2">
+                <span id="fileNameDisplay" class="text-muted small fw-semibold text-truncate" style="max-width: 250px;"></span>
+                <button type="button" id="removeFileBtn" class="btn btn-outline-danger btn-sm rounded-pill px-3">
+                  <i class="bi bi-trash3 me-1"></i>Remove
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Analyze Action Button -->
+          <div class="text-center mt-4">
+            <button type="submit" id="analyzeBtn" class="btn btn-warning btn-lg rounded-pill px-5 fw-bold text-dark shadow-sm" disabled>
+              <i class="bi bi-magic me-2"></i>Analyze Leaf Disease
+            </button>
+          </div>
+        </form>
+
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="d-none text-center py-4 mt-3 border-top">
+          <div class="spinner-border text-success mb-2" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <h6 class="fw-bold text-success mb-1">Scanning foliage patterns...</h6>
+          <p class="text-muted small mb-0">Running deep neural network inference on leaf morphology</p>
+        </div>
+      </div>
+
+      <!-- Camera Modal -->
+      <div class="modal fade" id="cameraModal" tabindex="-1" aria-labelledby="cameraModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content rounded-4 border-0 shadow">
+            <div class="modal-header border-0 pb-0">
+              <h5 class="modal-title fw-bold" id="cameraModalLabel"><i class="bi bi-camera me-2 text-success"></i>Live Leaf Capture</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeCameraBtn"></button>
+            </div>
+            <div class="modal-body text-center">
+              <div class="bg-black rounded-3 overflow-hidden mb-3 position-relative" style="min-height: 280px;">
+                <video id="cameraVideo" autoplay playsinline class="w-100" style="max-height: 340px; object-fit: cover;"></video>
+              </div>
+              <p class="small text-muted mb-3">Position the symptomatic leaf inside the camera frame with good lighting.</p>
+              <button type="button" id="capturePhotoBtn" class="btn btn-success rounded-pill px-4 fw-bold">
+                <i class="bi bi-camera-fill me-2"></i>Capture Photo
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tips for Better Results -->
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="p-3 border rounded-3 bg-white h-100 shadow-sm">
+            <div class="d-flex align-items-center gap-2 mb-2 text-success fw-bold">
+              <i class="bi bi-sun"></i>
+              <span>Good Lighting</span>
+            </div>
+            <p class="text-muted small mb-0">Capture in daylight or clear indirect light. Avoid heavy shadows or overexposed glare on the leaf.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-3 border rounded-3 bg-white h-100 shadow-sm">
+            <div class="d-flex align-items-center gap-2 mb-2 text-success fw-bold">
+              <i class="bi bi-aspect-ratio"></i>
+              <span>Focus on Symptoms</span>
+            </div>
+            <p class="text-muted small mb-0">Frame the affected leaf in the center so fungal lesions, spots, or discoloration patterns are sharp.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-3 border rounded-3 bg-white h-100 shadow-sm">
+            <div class="d-flex align-items-center gap-2 mb-2 text-success fw-bold">
+              <i class="bi bi-check-circle"></i>
+              <span>Single Leaf</span>
+            </div>
+            <p class="text-muted small mb-0">Place the leaf against a plain background (soil, paper, or hand) to minimize background noise.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
